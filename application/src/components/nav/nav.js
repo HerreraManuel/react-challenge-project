@@ -1,7 +1,17 @@
 import React from "react";
+import { connect, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { logoutUser } from "../../redux/actions/authActions";
 import "./nav.css";
 
+// same structure as loginForm
+// redux devtools shows token set to null when logging out
+const mapActionsToProps = dispatch => ({
+    commenceLogout() {
+      dispatch(logoutUser())
+    }
+})
+  
 const Nav = (props) => {
     return (
         <div className="nav-strip">
@@ -15,7 +25,7 @@ const Nav = (props) => {
                     <label className="nav-label">View Orders</label>
                 </div>
             </Link>
-            <Link to={"/login"} className="nav-link">
+            <Link to={"/"} className="nav-link" onClick={(event) => props.commenceLogout(event)}>
                 <div className="nav-link-style">
                     <label className="nav-label">Log Out</label>
                 </div>
@@ -24,4 +34,4 @@ const Nav = (props) => {
     );
 }
 
-export default Nav;
+export default connect(null, mapActionsToProps)(Nav);
