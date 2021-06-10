@@ -15,12 +15,12 @@ class OrderForm extends Component {
         super(props);
         this.state = {
             order_item: "",
-            quantity: "1"
+            quantity: "1",
         }
     }
 
     menuItemChosen(event) {
-        this.setState({ item: event.target.value });
+        this.setState({ order_item: event.target.value });
     }
 
     menuQuantityChosen(event) {
@@ -35,7 +35,7 @@ class OrderForm extends Component {
             body: JSON.stringify({
                 order_item: this.state.order_item,
                 quantity: this.state.quantity,
-                ordered_by: this.props.auth.email || 'Unknown!',
+                ordered_by: this.props.auth.email || 'Unknown!'
             }),
             headers: {
                 'Content-Type': 'application/json'
