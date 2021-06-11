@@ -18,6 +18,13 @@ class ViewOrders extends Component {
                     console.log('Error getting orders');
                 }
             });
+    }   
+
+    formatTime(hours, minutes, seconds){
+        const formatHours = hours.toString().padStart(2,0);
+        const formatMinutes = minutes.toString().padStart(2,0);
+        const formatSeconds = seconds.toString().padStart(2,0);
+        return [formatHours, formatMinutes, formatSeconds].join(':')
     }
 
     render() {
@@ -33,7 +40,7 @@ class ViewOrders extends Component {
                                     <p>Ordered by: {order.ordered_by || ''}</p>
                                 </div>
                                 <div className="col-md-4 d-flex view-order-middle-col">
-                                    <p>Order placed at {`${createdDate.getHours()}:${createdDate.getMinutes()}:${createdDate.getSeconds()}`}</p>
+                                    <p>Order placed at {this.formatTime(createdDate.getHours(), createdDate.getMinutes(), createdDate.getSeconds())}</p>
                                     <p>Quantity: {order.quantity}</p>
                                  </div>
                                  <div className="col-md-4 view-order-right-col">
